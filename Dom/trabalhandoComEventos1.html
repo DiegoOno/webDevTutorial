@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Trabalhando com Eventos #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class="conteudo exercicio">
+    <div>
+        <!-- <a href="https://google.com.br"
+            onclick="navAfter5seconds(event)">Google</a> -->
+        <a wait-5-seconds href="https://google.com.br">Google</a>
+    </div>
+    <script>
+        function navAfter5seconds(e) {
+            e.preventDefault()
+            console.log('Leaving after 5 seconds')
+            setTimeout(() => {
+                const link = e.target
+                window.location.href = e.target.href
+            }, 5000)
+        }
+
+        // const link = document.querySelector('a')
+        // link.onclick = navAfter5seconds
+
+        //Using custom attribute
+        const link = document.querySelector('[wait-5-seconds]')
+        link.onclick = navAfter5seconds
+    </script>
+</body>
