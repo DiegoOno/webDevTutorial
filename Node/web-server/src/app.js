@@ -1,23 +1,39 @@
+const path = require('path');
 const express = require('express');
 
 const app = express();
 const port = 3000
 
-app.get('/', (req, res) => {
-  console.log('Server is up on port 3000.');
-  res.send('<h1>Weather</h1>');
-});
+// Define paths for Express config
+const publicDirectoryPath = path.join(__dirname, '../public');
+const viewsPath = path.join(__dirname, '../template')
 
-app.get('/help', (req, res) => {
-  res.send([{
-    name: 'Andrew'
-  }, {
-    name: 'Sarah'
-  }]);
+// Setup handlebars engine and views location
+app.set('view engine', 'hbs');
+app.set('views', viewsPath);
+
+// Setup static directore to serve
+app.use(express.static(publicDirectoryPath));
+
+app.get('', (req, res) => {
+  res.render('index', {
+    title: 'Weather App',
+    name: 'Diego'
+  });
 });
 
 app.get('/about', (req, res) => {
-  res.send('<h1>About</h1>');
+  res.render('about', {
+    title: 'About me',
+    name: 'Diego'
+  });
+});
+
+app.get('/help', (req, res) => {
+  res.render('help', {
+    title: 'Help',
+    name: 'Diego'
+  });
 });
 
 app.get('/weather', (req, res) => {
